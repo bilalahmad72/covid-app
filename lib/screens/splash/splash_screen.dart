@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     Timer(
-      const Duration(seconds: 3),
+      const Duration(seconds: 5),
       () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => WorldStatScreen(),
@@ -45,6 +45,7 @@ class _SplashScreenState extends State<SplashScreen>
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

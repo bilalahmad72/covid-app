@@ -11,13 +11,13 @@ class _WorldStatScreenState extends State<WorldStatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
 
       body: Center(
         child: Text('World Stat Screen',
           style: TextStyle(
             fontSize: 24.0,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),
