@@ -1,3 +1,4 @@
+import 'package:covid_app/screens/country/detail/country_detail_screen.dart';
 import 'package:covid_app/services/world_stat_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -35,17 +36,13 @@ class _CountryListScreenState extends State<CountryListScreen> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextFormField(
-
                 style: const TextStyle(
                   fontSize: 16.0,
                   color: Colors.white,
                 ),
-
                 controller: searchController,
-                onChanged: (value){
-                  setState(() {
-
-                  });
+                onChanged: (value) {
+                  setState(() {});
                 },
                 decoration: InputDecoration(
                   hintText: 'Search Country',
@@ -85,7 +82,7 @@ class _CountryListScreenState extends State<CountryListScreen> {
                 future: statServices.countriesListApi(),
                 builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
                   if (!snapshot.hasData) {
-                    return  ListView.builder(
+                    return ListView.builder(
                       itemCount: 15,
                       itemBuilder: (context, index) {
                         return Shimmer.fromColors(
@@ -106,7 +103,7 @@ class _CountryListScreenState extends State<CountryListScreen> {
                                     width: width,
                                     color: Colors.white,
                                   ),
-                                  subtitle:  Container(
+                                  subtitle: Container(
                                     height: 15.0,
                                     width: width,
                                     color: Colors.white,
@@ -126,10 +123,9 @@ class _CountryListScreenState extends State<CountryListScreen> {
                       child: ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-
                           String countryName = snapshot.data![index]['country'];
 
-                          if(searchController.text.isEmpty) {
+                          if (searchController.text.isEmpty) {
                             return Column(
                               children: [
                                 Padding(
@@ -138,17 +134,38 @@ class _CountryListScreenState extends State<CountryListScreen> {
                                     leading: CircleAvatar(
                                       radius: 25,
                                       backgroundImage: NetworkImage(
-                                        snapshot.data![index]['countryInfo']['flag'],
+                                        snapshot.data![index]['countryInfo']
+                                            ['flag'],
                                       ),
                                     ),
-                                    onTap: () {},
-                                    title: Text(snapshot.data![index]['country'].toString(),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CountryDetailScreen(
+                                            image: snapshot.data![index]['countryInfo']['flag'],
+                                            name: snapshot.data![index]['country'],
+                                            totalCases: snapshot.data![index]['cases'],
+                                            totalDeaths: snapshot.data![index]['deaths'],
+                                            totalRecovered: snapshot.data![index]['recovered'],
+                                            active: snapshot.data![index]['active'],
+                                            critical: snapshot.data![index]['critical'],
+                                            todayRecovered: snapshot.data![index]['todayRecovered'],
+                                            test: snapshot.data![index]['tests'],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    title: Text(
+                                      snapshot.data![index]['country']
+                                          .toString(),
                                       style: const TextStyle(
                                         fontSize: 15.0,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    subtitle: Text(snapshot.data![index]['cases'].toString(),
+                                    subtitle: Text(
+                                      snapshot.data![index]['cases'].toString(),
                                       style: const TextStyle(
                                         fontSize: 12.0,
                                         color: Colors.white38,
@@ -158,7 +175,9 @@ class _CountryListScreenState extends State<CountryListScreen> {
                                 ),
                               ],
                             );
-                          }else if(countryName.toLowerCase().contains(searchController.text.toLowerCase())) {
+                          } else if (countryName
+                              .toLowerCase()
+                              .contains(searchController.text.toLowerCase())) {
                             return Column(
                               children: [
                                 Padding(
@@ -167,17 +186,38 @@ class _CountryListScreenState extends State<CountryListScreen> {
                                     leading: CircleAvatar(
                                       radius: 25,
                                       backgroundImage: NetworkImage(
-                                        snapshot.data![index]['countryInfo']['flag'],
+                                        snapshot.data![index]['countryInfo']
+                                            ['flag'],
                                       ),
                                     ),
-                                    onTap: () {},
-                                    title: Text(snapshot.data![index]['country'].toString(),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CountryDetailScreen(
+                                            image: snapshot.data![index]['countryInfo']['flag'],
+                                            name: snapshot.data![index]['country'],
+                                            totalCases: snapshot.data![index]['cases'],
+                                            totalDeaths: snapshot.data![index]['deaths'],
+                                            totalRecovered: snapshot.data![index]['recovered'],
+                                            active: snapshot.data![index]['active'],
+                                            critical: snapshot.data![index]['critical'],
+                                            todayRecovered: snapshot.data![index]['todayRecovered'],
+                                            test: snapshot.data![index]['tests'],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    title: Text(
+                                      snapshot.data![index]['country']
+                                          .toString(),
                                       style: const TextStyle(
                                         fontSize: 15.0,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    subtitle: Text(snapshot.data![index]['cases'].toString(),
+                                    subtitle: Text(
+                                      snapshot.data![index]['cases'].toString(),
                                       style: const TextStyle(
                                         fontSize: 12.0,
                                         color: Colors.white38,
@@ -187,7 +227,7 @@ class _CountryListScreenState extends State<CountryListScreen> {
                                 ),
                               ],
                             );
-                          }else {
+                          } else {
                             return Container();
                           }
                         },
