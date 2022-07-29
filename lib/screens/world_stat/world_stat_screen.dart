@@ -42,7 +42,7 @@ class _WorldStatScreenState extends State<WorldStatScreen>
             children: [
               SizedBox(height: height * 0.03),
               FutureBuilder(
-                future: statServices.fetchWorldStatsRecords(),
+                future: statServices.worldStatApi(),
                 builder: (context, AsyncSnapshot<WorldStatsModel> snapshot) {
                   if (!snapshot.hasData) {
                     return Expanded(
