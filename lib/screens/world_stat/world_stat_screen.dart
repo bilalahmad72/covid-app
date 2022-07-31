@@ -44,6 +44,7 @@ class _WorldStatScreenState extends State<WorldStatScreen>
               FutureBuilder(
                 future: statServices.worldStatApi(),
                 builder: (context, AsyncSnapshot<WorldStatsModel> snapshot) {
+
                   if (!snapshot.hasData) {
                     return Expanded(
                       flex: 1,
